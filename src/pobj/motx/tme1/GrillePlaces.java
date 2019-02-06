@@ -78,6 +78,7 @@ public class GrillePlaces {
 	
 	/**
 	 * 
+	 * 
 	 * @param cases liste de case 
 	 * Recherche les cases qui sont des emplacement possible de mot dans une liste de case et les ajouter à la liste places
 	 */
@@ -116,6 +117,15 @@ public class GrillePlaces {
 		
 		
 		return sb.toString();
+	}
+	public GrillePlaces getGrilPCopy() {
+		return new GrillePlaces(this.grille.copy());
+		
+	}
+	public GrillePlaces fixer(int m, String soluce) {
+		for (int i=0; i<getPlaces().get(m).size(); i++)
+			getPlaces().get(m).getCase(i).setChar(soluce.charAt(i));
+		return this;
 	}
 	
 	

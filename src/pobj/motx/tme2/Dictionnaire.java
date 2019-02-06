@@ -1,5 +1,8 @@
 package pobj.motx.tme2;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,6 +15,12 @@ public class Dictionnaire {
 	// stockage des mots
 	private List<String> mots = new ArrayList<>();
 
+	public Dictionnaire() {
+		
+	}
+	public Dictionnaire(List<String> mots) {
+		this.mots= mots;
+	}
 	/**
 	 * Ajoute un mot au Dictionnaire, en dernière position.
 	 * @param mot à ajouter, il sera stocké en minuscules (lowerCase)
@@ -59,6 +68,7 @@ public class Dictionnaire {
 		for (String mot : mots) {
 			if (mot.length() == len)
 				cible.add(mot);
+		
 			else
 				cpt++;
 		}
@@ -74,6 +84,34 @@ public class Dictionnaire {
 		} else {
 			return "Dico size =" + size();
 		}
+	}
+	public static Dictionnaire loadDictionnaire(String path) {
+		List<String> l = new ArrayList<>();
+		try(BufferedReader br = new BufferedReader(new FileReader(path))){
+			for(String line = br.readLine(); line !=null; line = br.readLine()) {
+				l.add(line);
+			}
+			
+		}
+		catch(IOException e) {
+			System.err.println("Probleme d'aceces au fichier");
+			e.printStackTrace();
+		}
+		return new Dictionnaire(l);
+	}
+	public int filtreParLettre(char c, int i) {
+		List<String> cible = new ArrayList<>();
+		
+		int cpt=0;
+		for (String mot : mots) {
+			if (mot.charAt(i)== c) 
+				cible.add(mot);
+			else 
+				cpt++;
+			
+		}
+		this.mots=cible;
+		return cpt;
 	}
 	
 }
