@@ -2,6 +2,8 @@ package pobj.motx.tme2;
 
 import java.util.*;
 
+import com.sun.xml.internal.bind.v2.runtime.unmarshaller.XsiNilLoader.Array;
+
 import pobj.motx.tme1.*;
 
 public class GrillePotentiel {
@@ -66,7 +68,6 @@ public class GrillePotentiel {
 		int k=0;
 		while(true) {
 			for(int i=0; i<contraintes.size();i++) {
-				System.out.println("k="+k);
 				k+=contraintes.get(i).reduce(this);
 		}
 			if(this.isDead())
@@ -76,6 +77,7 @@ public class GrillePotentiel {
 			k=0;
 		}	
 	}
-	
-	
+	public List<Emplacement> getGP() {
+		return gp.getPlaces();
+	}
 }

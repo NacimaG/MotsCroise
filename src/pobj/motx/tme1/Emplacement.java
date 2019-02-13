@@ -55,4 +55,11 @@ public class Emplacement {
 	public Case getCase(int i) {
 		return this.lettres.get(i);
 	}
+	public boolean hasCaseVide() {
+		for (Case box : lettres) {
+			if (box.isVide())
+				return true;
+		}
+		return false;
+	}
 }

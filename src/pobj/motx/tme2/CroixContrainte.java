@@ -1,5 +1,9 @@
 package pobj.motx.tme2;
-
+/**
+ * 
+ * @author 3704383 & 3521515
+ *
+ */
 public class CroixContrainte implements IContrainte {
 	private int m1,m2,c1,c2;
 	/**
