@@ -13,10 +13,15 @@ public class Emplacement {
 	}
 	/**
 	 * 
+	 * 
 	 * @param lettres construire un emplacement à partir d'une liste de Case où il ya au moins 2 cases vides
 	 */
 	public Emplacement(List<Case> lettres){
 		this.lettres=lettres;
+	}
+	
+	public int indexOf(Case box) {
+		return lettres.indexOf(box); 
 	}
 	/**
 	 * affichage de la grille

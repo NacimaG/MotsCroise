@@ -7,6 +7,7 @@ public class Case {
 	/**
 	 * Représentation d'une case dans la grille 
 	 * 
+	 * 
 	 * @param lig numéro de ligne
 	 * @param col numéro de colonne
 	 * @param c lettre contenu dans la case
@@ -62,5 +63,13 @@ public class Case {
 	 */
 	public boolean isPleine(){
 		return (ch == '*');
+	}
+	public boolean equals(Object other) {
+		if (this == other)
+			return true;
+		if((other==null)||(other.getClass()!=this.getClass()))
+			return false;
+		Case cse = (Case) other;
+		return((cse.colonne==this.colonne)&&(cse.ligne==this.ligne)&&(cse.ch==this.ch));
 	}
 }

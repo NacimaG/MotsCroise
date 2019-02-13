@@ -8,48 +8,48 @@ public class GrillePotentiel {
 	private GrillePlaces gp;
 	private Dictionnaire dic;
 	private List<Dictionnaire> motPot;
+	private List<IContrainte> contraintes;
+	private List<CroixContrainte> listcontr;
 	
 	public GrillePotentiel(GrillePlaces grille, Dictionnaire dicComplet) {
+		
+		listcontr= new ArrayList<>();
+		
 		this.gp = grille;
 		this.dic = dicComplet;
-		
 		motPot = new ArrayList<Dictionnaire>();
-		
+		contraintes = new ArrayList<>();
 		for (Emplacement emp : gp.getPlaces()) {
 			Dictionnaire d = dic.copy();
 			d.filtreLongueur(emp.size());
-			
-			
 			motPot.add(d);
-			
-			
-			}
-		for (Emplacement emp : gp.getPlaces()) {
 			for(int i=0; i<emp.size(); i++) {
-				if(!emp.getCase(i).isVide()){
-					if (gp.getPlaces().indexOf(emp)<gp.getNbHorizontal()) 
-						motPot.get(gp.getPlaces().indexOf(emp)).filtreParLettre(emp.getCase(i).getChar(), emp.getCase(i).getCol());
-					
-					else
-						motPot.get(gp.getPlaces().indexOf(emp)).filtreParLettre(emp.getCase(i).getChar(), emp.getCase(i).getLig());
-					
+				if(!emp.getCase(i).isVide()){ 
+					motPot.get(gp.getPlaces().indexOf(emp)).filtreParLettre(emp.getCase(i).getChar(), emp.indexOf(emp.getCase(i)));
 				}
 			}
-		}
-	}
-	/*
-	public GrillePotentiel(GrillePlaces grilleP, List<Dictionnaire> dicP, Dictionnaire dic) {
-		this.gp = grilleP;
-		this.motPot = dicP;
-		this.dic = dic;
-	}*/
-		
-	public boolean isDead() {
-
-		for (Emplacement emp : gp.getPlaces()) 
-			if(emp.size()==0)
-				return true;
 			
+		}
+//filtretr par contrainte
+		for(Emplacement emp : gp.getPlaces()) {
+			if(gp.getPlaces().indexOf(emp)<gp.getNbHorizontal()) 
+				for(int i=0;i<emp.size();i++) 
+					for(int j=gp.getNbHorizontal();j<gp.getPlaces().size();j++) 
+						for(int k=0;k< gp.getPlaces().get(j).size();k++) 
+							if((emp.getCase(i).isVide())&&(emp.getCase(i)==gp.getPlaces().get(j).getCase(k))) {
+								CroixContrainte cc =  new CroixContrainte(gp.getPlaces().indexOf(emp), i, j, k);
+								contraintes.add(cc);
+								cc.reduce(this);
+							}
+		}
+		
+		propage();
+	
+	}
+	public boolean isDead() {
+		for (Emplacement emp : gp.getPlaces()) 
+			if(motPot.get(gp.getPlaces().indexOf(emp)).size()==0)
+				return true;
 		return false;
 	}
 	public List<Dictionnaire> getMotsPot(){
@@ -58,5 +58,24 @@ public class GrillePotentiel {
 	public GrillePotentiel fixer(int m, String soluce) {
 		return new GrillePotentiel(gp.fixer(m, soluce).getGrilPCopy(), dic);
 	}
+	
+	public List<IContrainte> getContraintes(){
+		return contraintes;
+	}
+	private boolean propage() {
+		int k=0;
+		while(true) {
+			for(int i=0; i<contraintes.size();i++) {
+				System.out.println("k="+k);
+				k+=contraintes.get(i).reduce(this);
+		}
+			if(this.isDead())
+				return false;
+			if(k==0)
+				return true;
+			k=0;
+		}	
+	}
+	
 	
 }

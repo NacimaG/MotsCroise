@@ -45,6 +45,9 @@ public class Dictionnaire {
 	public String get(int i) {
 		return mots.get(i);
 	}
+	public List<String> getMots(){
+		return mots;
+	}
 
 	/**
 	 * Rend une copie de ce Dictionnaire.
@@ -104,14 +107,37 @@ public class Dictionnaire {
 		
 		int cpt=0;
 		for (String mot : mots) {
-			if (mot.charAt(i)== c) 
-				cible.add(mot);
-			else 
-				cpt++;
+			
+				if (mot.charAt(i)== c) 
+					cible.add(mot);
+				else 
+					cpt++;
 			
 		}
 		this.mots=cible;
 		return cpt;
 	}
+	public EnsembleLettre calcul(int i) {
+		List<Character> list= new ArrayList<>();
+		EnsembleLettre ensemble = new EnsembleLettre(list);
+		for(String mot : mots) {
+			ensemble.add(mot.charAt(i));
+		}
+		return ensemble;
+	}
+	public int filtre(int i, EnsembleLettre ensemble) {
+		List<String> cible = new ArrayList<>();
+		int cpt=0;
+		for (String mot : mots) {
+			if(ensemble.contains(mot.charAt(i)))
+				cible.add(mot);
+			else
+				cpt++;
+		}
+		this.mots=cible;
+			
+		return cpt;
+	}
+	
 	
 }

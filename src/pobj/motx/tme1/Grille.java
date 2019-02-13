@@ -56,7 +56,7 @@ public class Grille {
 		return this.hauteur;
 	}
 	/**
-	 * 
+	 
 	 * @return nombre de colonne de la grille
 	 */
 	public int nbCol(){
