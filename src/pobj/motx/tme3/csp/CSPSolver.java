@@ -4,7 +4,6 @@ public class CSPSolver {
 
 	public ICSP solve(ICSP problem) {
 		System.out.println("Solve : \n" + problem);
-		
 		// Condition terminale : succès
 		if (problem.getVars().isEmpty()) {
 			System.out.println("Problème résolu.");

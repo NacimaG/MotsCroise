@@ -7,3 +7,4 @@ public interface IVariable {
 	public List<String> getDomain();
 
 }
+

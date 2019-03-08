@@ -8,11 +8,11 @@ import pobj.motx.tme2.GrillePotentiel;
 
 public class MotX implements ICSP{
 	
-	private List<DicoVariable> listDicoVar;
+	private List<IVariable> listDicoVar;
 	private GrillePotentiel gp;
 	
 	public MotX(GrillePotentiel gp) {
-		listDicoVar = new ArrayList<DicoVariable>();
+		listDicoVar = new ArrayList<>();
 		for (Emplacement emp : gp.getGP()) {
 			if(emp.hasCaseVide())
 				listDicoVar.add(new DicoVariable(gp.getGP().indexOf(emp), gp));
@@ -24,7 +24,7 @@ public class MotX implements ICSP{
 	public List<IVariable> getVars() {
 		
 				
-		return null;
+		return listDicoVar;
 	}
 
 	@Override
