@@ -6,7 +6,7 @@ public class Case {
 	private char ch;
 	/**
 	 * Représentation d'une case dans la grille 
-	 * 
+	 *   
 	 * 
 	 * @param lig numéro de ligne
 	 * @param col numéro de colonne

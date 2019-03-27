@@ -37,7 +37,7 @@ public class GrilleSolverTest {
 		long timestamp = System.currentTimeMillis();
 		ICSP solution = solver.solve(problem);
 
-		System.out.println("Solution \n" + solution + " \nCalculée en "+ (System.currentTimeMillis() - timestamp) +" ms " );
+		System.out.println("Solution \n" + solution.toString() + " \nCalculée en "+ (System.currentTimeMillis() - timestamp) +" ms " );
 	}
 
 }

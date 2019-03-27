@@ -2,7 +2,6 @@ package pobj.motx.tme2;
 
 import java.util.*;
 
-import com.sun.xml.internal.bind.v2.runtime.unmarshaller.XsiNilLoader.Array;
 
 import pobj.motx.tme1.*;
 
@@ -11,11 +10,8 @@ public class GrillePotentiel {
 	private Dictionnaire dic;
 	private List<Dictionnaire> motPot;
 	private List<IContrainte> contraintes;
-	private List<CroixContrainte> listcontr;
 	
 	public GrillePotentiel(GrillePlaces grille, Dictionnaire dicComplet) {
-		
-		listcontr= new ArrayList<>();
 		
 		this.gp = grille;
 		this.dic = dicComplet;
@@ -48,12 +44,21 @@ public class GrillePotentiel {
 		propage();
 	
 	}
+	
+	/**
+	 * 
+	 * @return
+	 */
 	public boolean isDead() {
 		for (Emplacement emp : gp.getPlaces()) 
 			if(motPot.get(gp.getPlaces().indexOf(emp)).size()==0)
 				return true;
 		return false;
 	}
+	/**
+	 * 
+	 * @return
+	 */
 	public List<Dictionnaire> getMotsPot(){
 		return this.motPot;
 	}
@@ -79,5 +84,8 @@ public class GrillePotentiel {
 	}
 	public List<Emplacement> getGP() {
 		return gp.getPlaces();
+	}
+	public String toString() {
+		return gp.toString();
 	}
 }

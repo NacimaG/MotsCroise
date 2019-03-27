@@ -43,6 +43,9 @@ public class MotX implements ICSP{
 
 		return null;
 	}
+	public String toString() {
+		return gp.toString();
+	}
 	
 	
 
