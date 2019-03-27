@@ -12,7 +12,7 @@ public class Case {
 	 * @param col numéro de colonne
 	 * @param c lettre contenu dans la case
 	 */
-
+ 
 	public Case(int lig, int col, char c){
 		ligne = lig;
 		colonne = col;
